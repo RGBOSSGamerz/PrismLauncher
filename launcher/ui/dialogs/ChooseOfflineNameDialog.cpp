@@ -28,6 +28,7 @@ ChooseOfflineNameDialog::ChooseOfflineNameDialog(const QString& message, QWidget
 {
     ui->setupUi(this);
     ui->label->setText(message);
+    ui->noteLabel->setText(tr("Offline accounts can't join online-mode servers."));
 
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
     ui->buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("Cancel"));
