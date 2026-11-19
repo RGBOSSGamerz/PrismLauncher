@@ -86,6 +86,7 @@ MinecraftAccountPtr MinecraftAccount::createOffline(const QString& username)
     account->data.minecraftProfile.id = uuidFromUsername(username).toString(QUuid::Id128);
     account->data.minecraftProfile.name = username;
     account->data.minecraftProfile.validity = Validity::Certain;
+    account->data.accountState = AccountState::Online;
     return account;
 }
 
@@ -206,6 +207,10 @@ bool MinecraftAccount::isActive() const
 
 bool MinecraftAccount::shouldRefresh() const
 {
+    if (accountType() == AccountType::Offline) {
+        return false;
+    }
+
     /*
      * Never refresh accounts that are being used by the game, it breaks the game session.
      * Always refresh accounts that have not been refreshed yet during this session.
